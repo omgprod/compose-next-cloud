@@ -1,49 +1,6 @@
 # compose-next-cloud
-raspi
 
-version: "2"
-services:
-  nextcloud:
-    image: linuxserver/nextcloud
-    container_name: nextcloud
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-    volumes:
-      - /media/nextcloud/config:/config
-      - /media/nextcloud/data:/data
-    ports:
-      - 443:443
-    depends_on:
-      - mariadb
-    restart: unless-stopped
-  mariadb:
-    image: linuxserver/mariadb
-    container_name: mariadb
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - MYSQL_ROOT_PASSWORD=123456789
-      - TZ=Europe/London
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=ABCDEF
-    volumes:
-      - /media/nextcloud/mariadb:/config
-    restart: unless-stopped
-  web:
-    image: 'ulm0/gitlab'
-    restart: always
-    hostname: 'gitlab.example.com'
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://gitlab.example.com:9090'
-      gitlab_rails['gitlab_shell_ssh_port'] = 2224
-  ports:
-    - '9090:9090'
-    - '2224:22'
-  volumes:
-    - '/srv/gitlab/config:/etc/gitlab'
-    - '/srv/gitlab/logs:/var/log/gitlab'
-    - '/srv/gitlab/data:/var/opt/gitlab'
+- raspberry local nextcloud, local gitlab
+
+** HOW TO USE **
+
